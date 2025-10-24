@@ -1,11 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Personal Finance Goal Tracker</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    
+  <header>
+    <div>
+    <h1>Personal Finance Goal Tracker</h1>
+    </div>
+    <p>Track. Save. Grow.</p>
+  </header>
+
+  <main>
+    <!-- Add Goal Form -->
+    <section class="add-goal-section">
+        <div class="goal-card">
+        <div>
+      <h2>Add New Goal</h2>
+        </div>
+      <form id="goalForm">
+        <div class="form-group">
+          <label for="goalName">Goal Title</label>
+          <input type="text" id="goalName" placeholder="e.g. Buy a Laptop" required />
+        </div>
+        
+
+        <div class="form-group">
+          <label for="targetAmount">Target Amount ($)</label>
+          <input type="number" id="targetAmount" placeholder="e.g. 1500" required />
+        </div>
+
+        <div class="form-group">
+          <label for="currentAmount">Current Saved ($)</label>
+          <input type="number" id="currentAmount" placeholder="e.g. 300" required />
+        </div>
+
+        <div class="form-group">
+          <label for="targetDate">Target Date</label>
+          <input type="date" id="targetDate" required />
+        </div>
+
+        <button type="submit" id="addGoalBtn">Add Goal</button>
+      </form>
+      </div>
+    </section>
+
+    <!-- Dashboard Summary -->
+    <section class="dashboard">
+      <h2>Progress Overview</h2>
+      <div class="stats-container">
+        <div class="stat-card">
+          <h3 id="totalGoals">0</h3>
+          <p>Total Goals</p>
+        </div>
+        <div class="stat-card">
+          <h3 id="completedGoals">0</h3>
+          <p>Completed Goals</p>
+        </div>
+        <div class="stat-card">
+          <h3 id="totalSaved">$0</h3>
+          <p>Total Saved</p>
+        </div>
+        <div class="stat-card">
+          <h3 id="overallProgress">0%</h3>
+          <p>Overall Progress</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- progress-overview -->
+    <section class="progress-overview">
+        <div class="progress-header">
+            <i></i>
+      <p>Progress Overview</p>
+      </div>
+      <div id="goalsContainer" class="goals-container">
+        <!-- Dynamic Progress cards will appear here plu Graph -->
+         <div class="progress-cards">
+            <div class="Total Goals">
+                <i></i>
+                <p>4</p>
+                <p>Total Goals</p>
+            </div>
+
+            <div class="Completed">
+                <i></i>
+                <p>4</p>
+                <p>Total Goals</p>
+            </div>
+
+            <div class="Total Saved">
+                <i></i>
+                <p>4</p>
+                <p>Total Goals</p>
+            </div>
+
+            <div class="Overall Progress">
+                <i></i>
+                <p>4</p>
+                <p>Total Goals</p>
+            </div>
+         </div>
+
+
+         <!-- <div class="Goal Progress">
+            <div class="Graph">
+                <canvas id="progressChart"></canvas>
+            </div>
+         </div> -->
+
+      </div>
+    </section>
+  
+
+
+
+    <!-- Goals Cards -->
+    <section class="your-goals">
+      <h2>Your Goals</h2>
+      <div id="goalsContainer" class="goals-container">
+        <!-- goal cards will appear here -->
+         <div></div>
+      </div>
+    </section>
+
+
+  </main>
+
+  <footer>
+    <div class="footer-container">
+        <p>"Every penny saved today is a step towards your dreams tomorrow. Keep going!"</p>
+    <div class="contact-us">
+        [Email Us] [GitHub] [Twitter]
+    </div>
+    <p>Designed by web dev group 10 New Horizones</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
