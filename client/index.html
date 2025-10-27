@@ -1,145 +1,140 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Personal Finance Goal Tracker</title>
+
+  <!-- Link to the stylesheet (separate file) -->
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>
-    <div>
-    <h1>Personal Finance Goal Tracker</h1>
+  <!--
+    Page layout:
+    - header: app title & tagline
+    - main: Add form, Progress Overview (no graph), Goals list
+    - footer: contact links & copyright
+  -->
+
+  <header class="site-header" role="banner">
+    <div class="container header-inner">
+      <div class="brand">
+        <div class="brand-icon" aria-hidden="true">💰</div>
+        <div>
+          <h1 class="site-title">Personal Finance Goal Tracker</h1>
+          <p class="site-sub">Track. Save. Grow.</p>
+        </div>
+      </div>
     </div>
-    <p>Track. Save. Grow.</p>
+
   </header>
 
-  <main>
+  <main class="container main-content" id="app" role="main" aria-live="polite">
     <!-- Add Goal Form -->
-    <section class="add-goal-section">
-        <div class="goal-card">
-        <div>
-      <h2>Add New Goal</h2>
-        </div>
-      <form id="goalForm">
-        <div class="form-group">
-          <label for="goalName">Goal Title</label>
-          <input type="text" id="goalName" placeholder="e.g. Buy a Laptop" required />
-        </div>
-        
+    <section class="panel" aria-labelledby="add-goal-title">
+      <h2 id="add-goal-title" class="panel-title">Add New Goal</h2>
 
-        <div class="form-group">
-          <label for="targetAmount">Target Amount ($)</label>
-          <input type="number" id="targetAmount" placeholder="e.g. 1500" required />
-        </div>
+      <!-- Form: adding new goal -->
+      <form id="add-goal-form" class="form-grid" novalidate>
+        <!-- Title -->
+        <label class="form-field" for="goal-title">
+          <span class="label">Goal Title</span>
+          <input id="goal-title" name="title" type="text" required placeholder="e.g., Save for new laptop" />
+        </label>
 
-        <div class="form-group">
-          <label for="currentAmount">Current Saved ($)</label>
-          <input type="number" id="currentAmount" placeholder="e.g. 300" required />
-        </div>
+        <!-- Target amount -->
+        <label class="form-field" for="goal-target">
+          <span class="label">Target Amount ($)</span>
+          <input id="goal-target" name="target" type="number" inputmode="decimal" step="0.01" required placeholder="1000.00" />
+        </label>
 
-        <div class="form-group">
-          <label for="targetDate">Target Date</label>
-          <input type="date" id="targetDate" required />
-        </div>
+        <!-- Saved amount -->
+        <label class="form-field" for="goal-saved">
+          <span class="label">Current Saved Amount ($)</span>
+          <input id="goal-saved" name="saved" type="number" inputmode="decimal" step="0.01" placeholder="0.00" />
+        </label>
 
-        <button type="submit" id="addGoalBtn">Add Goal</button>
+        <!-- Target date -->
+        <label class="form-field" for="goal-date">
+          <span class="label">Target Date</span>
+          <input id="goal-date" name="date" type="date" required />
+        </label>
+
+        <!-- Submit -->
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary btn-block" id="add-goal-button">
+            Add Goal
+          </button>
+        </div>
       </form>
+    </section>
+
+    <!-- Progress Overview (textual, no graph) -->
+    <section class="panel" aria-labelledby="overview-title">
+      <h2 id="overview-title" class="panel-title">Progress Overview</h2>
+
+      <!-- Four neutral summary cards (Total goals, Completed, Total saved, Overall %) -->
+      <div class="overview-grid" id="overview-stats">
+        <!-- JS will populate these cards -->
+        <div class="stat-card">
+          <div class="stat-label">Total Goals</div>
+          <div class="stat-value" id="stat-total-goals">—</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Completed</div>
+          <div class="stat-value" id="stat-completed">—</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Total Saved</div>
+          <div class="stat-value" id="stat-total-saved">—</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Overall Progress</div>
+          <div class="stat-value" id="stat-overall-progress">—</div>
+        </div>
       </div>
     </section>
 
-    <!-- Dashboard Summary -->
-    <section class="dashboard">
-      <h2>Progress Overview</h2>
-      <div class="stats-container">
-        <div class="stat-card">
-          <h3 id="totalGoals">0</h3>
-          <p>Total Goals</p>
-        </div>
-        <div class="stat-card">
-          <h3 id="completedGoals">0</h3>
-          <p>Completed Goals</p>
-        </div>
-        <div class="stat-card">
-          <h3 id="totalSaved">$0</h3>
-          <p>Total Saved</p>
-        </div>
-        <div class="stat-card">
-          <h3 id="overallProgress">0%</h3>
-          <p>Overall Progress</p>
-        </div>
+    <!-- Goals List -->
+    <section class="panel" aria-labelledby="goals-title">
+      <h2 id="goals-title" class="panel-title">Your Goals</h2>
+
+      <div id="goals-grid" class="goals-grid" aria-live="polite" aria-relevant="all">
+        <!-- Each goal card is inserted here by script.js -->
+      </div>
+
+      <!-- Empty placeholder (shown when no goals exist) -->
+      <div id="no-goals" class="empty-state" hidden>
+        <div class="empty-icon">💸</div>
+        <h3>No Goals Yet</h3>
+        <p>Add your first goal using the form above to begin tracking your savings.</p>
       </div>
     </section>
-
-    <!-- progress-overview -->
-    <section class="progress-overview">
-        <div class="progress-header">
-            <i></i>
-      <p>Progress Overview</p>
-      </div>
-      <div id="goalsContainer" class="goals-container">
-        <!-- Dynamic Progress cards will appear here plu Graph -->
-         <div class="progress-cards">
-            <div class="Total Goals">
-                <i></i>
-                <p>4</p>
-                <p>Total Goals</p>
-            </div>
-
-            <div class="Completed">
-                <i></i>
-                <p>4</p>
-                <p>Total Goals</p>
-            </div>
-
-            <div class="Total Saved">
-                <i></i>
-                <p>4</p>
-                <p>Total Goals</p>
-            </div>
-
-            <div class="Overall Progress">
-                <i></i>
-                <p>4</p>
-                <p>Total Goals</p>
-            </div>
-         </div>
-
-
-         <!-- <div class="Goal Progress">
-            <div class="Graph">
-                <canvas id="progressChart"></canvas>
-            </div>
-         </div> -->
-
-      </div>
-    </section>
-  
-
-
-
-    <!-- Goals Cards -->
-    <section class="your-goals">
-      <h2>Your Goals</h2>
-      <div id="goalsContainer" class="goals-container">
-        <!-- goal cards will appear here -->
-         <div></div>
-      </div>
-    </section>
-
-
   </main>
 
-  <footer>
-    <div class="footer-container">
-        <p>"Every penny saved today is a step towards your dreams tomorrow. Keep going!"</p>
-    <div class="contact-us">
-        [Email Us] [GitHub] [Twitter]
-    </div>
-    <p>Designed by web dev group 10 New Horizones</p>
+  <!-- Footer -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container footer-inner">
+      <p class="footer-quote">
+        "Every penny saved today is a step towards your dreams tomorrow. Keep going!" 💪
+      </p>
+      <div class="footer-links">
+        <a href="mailto:olorundadaniel3@gmail.com" class="link">Email</a>
+        <a href="https://www.github.com/Balogram-dev" class="link">GitHub</a>
+        <a href="https://www.x.com/DrLightHouse_HQ" class="link">Twitter</a>
+      </div>
+      <small class="copyright">© 2025 Personal Finance Goal Tracker</small>
     </div>
   </footer>
 
+
+  <!-- Toast container for ephemeral messages -->
+  <div id="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Link to the JS file (separate file) -->
   <script src="script.js"></script>
 </body>
 </html>

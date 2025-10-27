@@ -1,0 +1,164 @@
+:root{
+  --bg: #ffffff;                 /* page background */
+  --text: #101010;               /* main text */
+  --muted: #6b7280;              /* muted text */
+  --surface: #ffffff;            /* card background */
+  --border: #e6e6e6;             /* subtle borders */
+  --radius: 10px;
+
+  /* Electric accent palette (flat, no gradients) */
+  --electric-blue: #0077ff;
+  --electric-green: #00cc66;
+  --electric-pink: #ff33aa;
+  --electric-yellow: #ffcc00;
+
+  /* UI */
+  --shadow: 0 6px 18px rgba(16,24,40,0.06);
+  --container-max: 1100px;
+  --gap: 16px;
+  --card-padding: 18px;
+}
+
+* { box-sizing: border-box; }
+html,body { height: 100%; margin:0; font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+body { background: var(--bg); color: var(--text); line-height:1.4; }
+
+/* ------------------------------
+   Layout / Container utilities
+   ------------------------------ */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* ------------------------------
+   Header styles
+   ------------------------------ */
+.site-header { border-bottom: 1px solid var(--border); background: #f6fbf9; }
+.header-inner { display:flex; align-items:center; justify-content:space-between; padding:18px 0; }
+.brand { display:flex; gap:12px; align-items:center; }
+.brand-icon { background: var(--electric-blue); color: #fff; font-size:20px; padding:8px; border-radius:10px; display:inline-flex; align-items:center; justify-content:center; box-shadow:var(--shadow); }
+.site-title { margin:0; font-size:20px; color:var(--electric-blue); }
+.site-sub { margin:0; font-size:13px; color:var(--muted); }
+
+/* ------------------------------
+   Panels & grid layout
+   ------------------------------ */
+.main-content { padding-top: 28px; padding-bottom: 40px; }
+.panel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); margin-bottom: 20px; }
+.panel-title { margin:0 0 12px 0; font-size:16px; color: var(--electric-blue); }
+
+/* Form layout: two-column on medium screens */
+.form-grid { display:grid; gap:12px; grid-template-columns: 1fr; align-items:end; }
+@media(min-width:720px){ .form-grid { grid-template-columns: 1fr 1fr; } }
+.form-field { display:flex; flex-direction:column; gap:6px; }
+.label { font-size:13px; color:var(--muted); }
+input[type="text"], input[type="number"], input[type="date"] {
+  padding:10px 12px; border-radius:8px; border:1px solid var(--border); outline:none; font-size:14px;
+  background: #fff;
+}
+input:focus { border-color: var(--electric-blue); box-shadow: 0 0 0 4px rgba(0,119,255,0.08); }
+
+/* Form actions */
+.form-actions { grid-column: 1 / -1; display:flex; gap:12px; margin-top:6px; }
+.btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:10px 14px; border-radius:8px; font-weight:600; cursor:pointer; border:1px solid transparent; }
+.btn-block { width:100%; }
+.btn-primary { background: var(--electric-blue); color:#fff; }
+.btn-primary:hover { filter:brightness(0.95); }
+.btn-outline { background:transparent; color:var(--electric-blue); border-color:var(--electric-blue); }
+.btn-danger { background: var(--electric-pink); color:#fff; }
+
+/* ------------------------------
+   Overview stats cards
+   ------------------------------ */
+.overview-grid { display:grid; gap:12px; grid-template-columns: repeat(2,1fr); }
+@media(min-width:900px){ .overview-grid { grid-template-columns: repeat(4,1fr); } }
+
+.stat-card { padding:14px; background:#fff; border-radius:8px; border:1px solid var(--border); text-align:left; }
+.stat-label { font-size:12px; color:var(--muted); margin-bottom:6px; }
+.stat-value { font-size:18px; font-weight:700; color:var(--electric-green); }
+
+/* ------------------------------
+   Goals Grid & Cards
+   ------------------------------ */
+.goals-grid { display:grid; gap:16px; grid-template-columns: 1fr; margin-top:8px; }
+@media(min-width:720px){ .goals-grid { grid-template-columns: repeat(2, 1fr); } }
+@media(min-width:1100px){ .goals-grid { grid-template-columns: repeat(3, 1fr); } }
+
+.goal-card { background:#fff; border-radius:10px; padding: var(--card-padding); border: 1px solid var(--border); box-shadow: var(--shadow); display:flex; flex-direction:column; gap:12px; }
+.goal-title { font-weight:700; color:var(--electric-blue); display:flex; gap:8px; align-items:center; }
+.goal-row { display:flex; justify-content:space-between; align-items:center; gap:8px; font-size:14px; color:var(--muted); }
+.progress-wrapper { display:flex; flex-direction:column; gap:6px; }
+.progress-bar { height:12px; background:#f3f3f3; border-radius:999px; overflow:hidden; border:1px solid var(--border); }
+.progress-fill { height:100%; width:0%; background:var(--electric-green); transition: width 300ms ease; }
+.goal-actions { display:flex; gap:8px; flex-wrap:wrap; }
+
+/* small badges / muted text */
+.muted { color:var(--muted); font-size:13px; }
+
+/* ------------------------------
+   Empty state (when no goals)
+   ------------------------------ */
+.empty-state { text-align:center; padding:32px; border-radius:8px; background:#fff; border:1px dashed var(--border); }
+.empty-icon { font-size:36px; margin-bottom:8px; }
+
+/* ------------------------------
+   Footer
+   ------------------------------ */
+.site-footer { border-top:1px solid var(--border); padding:18px 0; background:#fafafa; }
+.footer-inner { display:flex; flex-direction:column; gap:10px; align-items:center; text-align:center; }
+.footer-links { display:flex; gap:12px; }
+.link { color:var(--electric-blue); text-decoration:none; font-weight:600; }
+
+/* ------------------------------
+   Modal / Dialog styles
+   - simple centered panel with backdrop
+   ------------------------------ */
+#modal-root { position:relative; z-index:1000; }
+.modal { position:fixed; inset:0; display:flex; align-items:center; justify-content:center; padding:20px; background: rgba(3,6,10,0.25); }
+.modal-panel { width:100%; max-width:480px; background:#fff; border-radius:10px; padding:18px; box-shadow:var(--shadow); border:1px solid var(--border); }
+.modal-form { display:flex; flex-direction:column; gap:10px; }
+.modal-actions { margin-top:8px; display:flex; gap:8px; justify-content:flex-end; }
+
+/* Add savings preview box */
+.modal-preview { background:#f8fff9; border:1px solid #e1f6ea; padding:10px; border-radius:8px; color:var(--electric-green); font-weight:600; }
+
+/* ------------------------------
+   Toast notifications
+   - positioned at top center, simple fading in/out
+   ------------------------------ */
+#toast-container {
+  position: fixed;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2000;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  align-items:center;
+  pointer-events:none; /* allow clicks to pass through except on toasts */
+}
+
+.toast {
+  pointer-events:auto;
+  background:#111; color:#fff; padding:10px 14px; border-radius:8px;
+  box-shadow:var(--shadow); opacity:0; transform: translateY(-6px); transition: all 240ms ease;
+}
+.toast.show { opacity:1; transform: translateY(0); }
+
+/* ------------------------------
+   Small utility helpers
+   ------------------------------ */
+.sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+
+/* ------------------------------
+   Responsive tweaks
+   ------------------------------ */
+@media(max-width:520px){
+  .header-inner { padding:12px; }
+  .panel { padding:12px; }
+  .card-actions { flex-direction:column; }
+}
