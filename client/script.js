@@ -1,26 +1,6 @@
 // Goals data
 let goals = [
-    {
-        id: 1,
-        name: "New Laptop",
-        targetAmount: 1200,
-        currentAmount: 450,
-        icon: "💻"
-    },
-    {
-        id: 2,
-        name: "Vacation to Bali",
-        targetAmount: 3000,
-        currentAmount: 800,
-        icon: "✈️"
-    },
-    {
-        id: 3,
-        name: "Emergency Fund",
-        targetAmount: 5000,
-        currentAmount: 2100,
-        icon: "🏦"
-    }
+
 ];
 
 let currentEditId = null;
@@ -100,15 +80,14 @@ function renderGoals() {
         return `
             <div class="goal-card">
                 <div class="goal-header">
-                    <div class="goal-icon">${goal.icon}</div>
                     <div class="goal-info">
                         <div class="goal-name">${goal.name}</div>
-                        <div class="goal-target">Target: $${goal.targetAmount.toLocaleString()}</div>
+                        <div class="goal-target">Target: N${goal.targetAmount.toLocaleString()}</div>
                     </div>
                 </div>
                 <div class="progress-section">
                     <div class="progress-info">
-                        <span class="progress-label">$${goal.currentAmount.toLocaleString()} saved</span>
+                        <span class="progress-label">N${goal.currentAmount.toLocaleString()} saved</span>
                         <span class="progress-label">${progress.toFixed(0)}%</span>
                     </div>
                     <div class="progress-bar-container">
@@ -116,7 +95,7 @@ function renderGoals() {
                     </div>
                     <div class="progress-info" style="margin-top: 8px;">
                         <span class="progress-label" style="color: ${remaining === 0 ? '#059669' : '#64748b'};">
-                            ${remaining === 0 ? '🎉 Goal Achieved!' : `$${remaining.toLocaleString()} remaining`}
+                            ${remaining === 0 ? '🎉 Goal Achieved!' : `N${remaining.toLocaleString()} remaining`}
                         </span>
                     </div>
                 </div>
@@ -144,8 +123,8 @@ function updateOverview() {
     const overallProgress = totalTarget > 0 ? (totalSaved / totalTarget) * 100 : 0;
 
     document.getElementById('totalGoals').textContent = totalGoals;
-    document.getElementById('totalTarget').textContent = '$' + totalTarget.toLocaleString();
-    document.getElementById('totalSaved').textContent = '$' + totalSaved.toLocaleString();
+    document.getElementById('totalTarget').textContent = 'N' + totalTarget.toLocaleString();
+    document.getElementById('totalSaved').textContent = 'N' + totalSaved.toLocaleString();
     document.getElementById('overallProgress').textContent = overallProgress.toFixed(0) + '%';
 }
 
@@ -207,7 +186,7 @@ function confirmEditGoal() {
         renderGoals();
         updateOverview();
         closeModal();
-        showToast('Goal updated successfully! ✏️');
+        showToast('Goal updated successfully!');
     }
 }
 
@@ -217,7 +196,7 @@ function deleteGoal(id) {
         goals = goals.filter(g => g.id !== id);
         renderGoals();
         updateOverview();
-        showToast('Goal deleted successfully! 🗑️');
+        showToast('Goal deleted successfully!');
     }
 }
 
